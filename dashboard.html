@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | FinWise AI{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <div>
+    <p class="eyebrow">FINANCIAL OVERVIEW</p>
+    <h1>Your money at a glance</h1>
+    <p>Track cash flow and turn spending data into better decisions.</p>
+  </div>
+  <a class="button" href="{{ url_for('ai_advisor') }}">Ask AI Advisor →</a>
+</div>
+
+<div class="cards">
+  <div class="card income"><small>Total Income</small><b>₹{{ "%.2f"|format(total_income) }}</b></div>
+  <div class="card expense"><small>Total Expenses</small><b>₹{{ "%.2f"|format(total_expenses) }}</b></div>
+  <div class="card balance"><small>Available Balance</small><b>₹{{ "%.2f"|format(balance) }}</b></div>
+  <div class="card health"><small>Financial Health</small><b>{{ financial_health }}/100</b></div>
+</div>
+
+<div class="two">
+  <section class="panel">
+    <h2>Add Income</h2>
+    <form method="post" action="{{ url_for('add_income') }}">
+      <input type="number" step="0.01" name="amount" placeholder="Amount ₹" required>
+      <input name="source" placeholder="Source e.g. Salary" required>
+      <button>Add Income</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Add Expense</h2>
+    <form method="post" action="{{ url_for('add_expense') }}">
+      <input type="number" step="0.01" name="amount" placeholder="Amount ₹" required>
+      <select name="category">
+        <option>Food</option><option>Rent</option><option>Transport</option>
+        <option>Education</option><option>Entertainment</option><option>Shopping</option>
+        <option>Healthcare</option><option>Bills</option><option>Other</option>
+      </select>
+      <input name="description" placeholder="Description">
+      <button>Add Expense</button>
+    </form>
+  </section>
+</div>
+
+<div class="two">
+  <section class="panel">
+    <h2>Spending by category</h2>
+    {% if categories %}
+      {% for key, value in categories.items() %}
+      <div class="barrow">
+        <span>{{ key }}</span><span>₹{{ "%.2f"|format(value) }}</span>
+        <div class="bar"><i style="width:{{ (value / total_expenses * 100) if total_expenses else 0 }}%"></i></div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>No expenses recorded yet.</p>
+    {% endif %}
+  </section>
+
+  <section class="panel">
+    <h2>Quick AI insights</h2>
+    <ul>
+      <li>Track expenses regularly.</li>
+      <li>Review your biggest spending category.</li>
+      <li>Use the EMI calculator before borrowing.</li>
+      <li>Set a realistic monthly savings target.</li>
+    </ul>
+    <a class="button secondary" href="{{ url_for('financial_tips') }}">View recommendations</a>
+  </section>
+</div>
+{% endblock %}

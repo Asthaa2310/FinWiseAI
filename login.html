@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Login | FinWise AI{% endblock %}
+{% block content %}
+<div class="auth">
+  <div class="hero">
+    <p class="eyebrow">PERSONAL FINANCE ADVISOR</p>
+    <h1>Make your money<br><span>work smarter.</span></h1>
+    <p>Track spending, understand your financial health, and get AI-powered guidance in one place.</p>
+  </div>
+  <div class="authbox">
+    <h2>Welcome back</h2>
+    <p>Sign in to your finance dashboard.</p>
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+    <form method="post">
+      <input name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button>Sign in</button>
+    </form>
+    <p>New here? <a href="{{ url_for('register') }}">Create account</a></p>
+  </div>
+</div>
+{% endblock %}

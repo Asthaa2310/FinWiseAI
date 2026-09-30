@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Finance Advisor Bot{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% if current_user.is_authenticated %}
+<nav>
+  <a class="brand" href="{{ url_for('dashboard') }}">FinWise<span>AI</span></a>
+  <div class="navlinks">
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('financial_summary') }}">Summary</a>
+    <a href="{{ url_for('ai_advisor') }}">AI Advisor</a>
+    <a href="{{ url_for('financial_tips') }}">Tips</a>
+    <a href="{{ url_for('loan_calculator') }}">Calculators</a>
+    <a href="{{ url_for('credit_analyzer') }}">Credit</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </div>
+</nav>
+{% endif %}
+
+<main>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash">{% for message in messages %}{{ message }}{% endfor %}</div>
+  {% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Credit Analyzer | FinWise AI{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <div>
+    <p class="eyebrow">CREDIT EDUCATION</p>
+    <h1>Credit Score</h1>
+    <p>Illustrative score and factors for the project demo.</p>
+  </div>
+</div>
+
+<section class="panel score">
+  <div class="scorecircle">{{ score }}</div>
+  <h2>Good standing</h2>
+  <p>Payment history, utilization, credit age, and account mix are common factors considered in credit scoring.</p>
+</section>
+{% endblock %}

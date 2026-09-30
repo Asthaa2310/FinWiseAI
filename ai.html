@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}AI Advisor | FinWise AI{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <div>
+    <p class="eyebrow">GEMINI-POWERED</p>
+    <h1>Ask your Finance Advisor</h1>
+    <p>Ask about budgeting, spending, saving, or your recorded finances.</p>
+  </div>
+</div>
+
+<section class="panel chat">
+  <div class="status">{{ "● Gemini connected" if gemini_ready else "● Local fallback mode" }}</div>
+  <form method="post">
+    <textarea name="question" placeholder="Example: How can I reduce my food spending based on my current data?" required>{{ question }}</textarea>
+    <button>Get Financial Advice</button>
+  </form>
+
+  {% if answer %}
+  <div class="answer">
+    <h3>Advisor response</h3>
+    <p>{{ answer }}</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

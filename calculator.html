@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ calculator_type }} | FinWise AI{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <div>
+    <p class="eyebrow">FINANCIAL TOOLS</p>
+    <h1>{{ calculator_type }}</h1>
+    <p>Estimate monthly payments and total borrowing cost.</p>
+  </div>
+</div>
+
+<section class="panel">
+  <form method="post">
+    <input type="number" step="0.01" name="amount" placeholder="Loan amount ₹" required>
+    <input type="number" step="0.01" name="rate" placeholder="Annual interest rate %" required>
+    {% if calculator_type == "Loan Calculator" %}
+      <input type="number" name="years" placeholder="Years" required>
+    {% else %}
+      <input type="number" name="months" placeholder="Months" required>
+    {% endif %}
+    <button>Calculate</button>
+  </form>
+
+  {% if result %}
+  <div class="cards">
+    <div class="card balance"><small>Monthly EMI</small><b>₹{{ "%.2f"|format(result.emi) }}</b></div>
+    <div class="card expense"><small>Total Interest</small><b>₹{{ "%.2f"|format(result.interest) }}</b></div>
+    <div class="card income"><small>Total Payment</small><b>₹{{ "%.2f"|format(result.total) }}</b></div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

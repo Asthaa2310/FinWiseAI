@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Financial Summary | FinWise AI{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <div>
+    <p class="eyebrow">MONTHLY MONITORING</p>
+    <h1>Financial Summary</h1>
+    <p>A clear snapshot of your recorded finances.</p>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card income"><small>Income</small><b>₹{{ "%.2f"|format(total_income) }}</b></div>
+  <div class="card expense"><small>Expenses</small><b>₹{{ "%.2f"|format(total_expenses) }}</b></div>
+  <div class="card balance"><small>Balance</small><b>₹{{ "%.2f"|format(balance) }}</b></div>
+  <div class="card health"><small>Savings Rate</small><b>{{ "%.1f"|format(savings_rate) }}%</b></div>
+</div>
+
+<section class="panel">
+  <h2>Category analysis</h2>
+  {% if categories %}
+    <div class="table">
+    {% for key, value in categories.items() %}
+      <div><span>{{ key }}</span><strong>₹{{ "%.2f"|format(value) }}</strong></div>
+    {% endfor %}
+    </div>
+  {% else %}
+    <p>No expense data yet. Add expenses from the dashboard.</p>
+  {% endif %}
+</section>
+{% endblock %}

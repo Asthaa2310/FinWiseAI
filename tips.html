@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Financial Tips | FinWise AI{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <div>
+    <p class="eyebrow">PERSONALIZED INSIGHTS</p>
+    <h1>Financial Recommendations</h1>
+    <p>Practical suggestions based on your recorded activity.</p>
+  </div>
+</div>
+
+<section class="panel">
+  {% for tip in tips %}
+  <div class="tip">✦ {{ tip }}</div>
+  {% endfor %}
+  <a class="button" href="{{ url_for('ai_advisor') }}">Ask Gemini a question →</a>
+</section>
+{% endblock %}
